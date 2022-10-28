@@ -4,3 +4,6 @@
 [submodule "book"]
 	path = book
 	url = https://github.com/melodytowett/My-library.git
+[submodule "shelfs"]
+	path = shelfs
+	url = https://github.com/melodytowett/My-library.git
