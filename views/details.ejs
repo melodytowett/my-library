@@ -11,21 +11,33 @@
   <%- include('./partial/nav.ejs') %> 
   <div class="books content">
     <h1>My Library</h1>
-    <% if(books.length >0 ){ %>
-      <% books.forEach(book =>{%>
-        <a class="single" href="/books/<%= book.id  %>" >
         <h3 class="title"> <em>Title :</em> <%= book.title %> </h3>
-       </a>
+       
         <h5 class="author"> <em>Author :</em> <%= book.author %> </h5>
         
         <p class="description"> <em>Book Summary :</em> <%= book.description  %> </p>
        
         <h6 class="date"> <em>Published Date :</em> <%= book.release_date %> </h6>
-        
-     <%  }) %>
-     <% }else { %> 
-    <p>There are nobooks in your library yet....</p>
-    <% } %>  
   </div>
+  <div>
+    <button class="btn btn-danger"><a class="delete" data-doc ="<%= book.id  %> ">delete</a></button>
+  </div>
+  <script>
+    const trash = document.querySelector('a.delete');
+    trash.addEventListener('click',(e)=>{
+        const endpoint = `/books/${trash.dataset.doc}`;
+        fetch(endpoint,{
+            method:'DELETE'
+        })
+        .then(()=>{
+            fetch(endpoint,{
+                method:'DELETE'
+            })
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    })
+  </script>
 </body>
 </html>

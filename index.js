@@ -1,7 +1,7 @@
 const http = require('http');
 const express = require('express');
 const { render } = require('ejs');
-const Book = require('./models/books.model');
+const Book = require('./models/books');
 const app = express();
 const sequelize= require("sequelize");
 const { title } = require('process');
@@ -53,6 +53,27 @@ app.post('/books',(req,res)=>{
     .catch((err)=>{
         console.log(err);
     })
+})
+
+app.get('/books/:id',(req,res)=>{
+    const id = req.params.id;
+    Book.findByPk(id)
+    .then(result=>{
+        res.render('details',{book: result});
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+})
+app.delete('/books/:id',(req,res)=>{
+    const id = req.params.id;
+        Book.findByPkAndDelete(id)
+        .then(result=>{
+                    res.json({redirect:'/books'});
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
 })
 app.get('/add',(req,res)=>{
     res.render('add')
