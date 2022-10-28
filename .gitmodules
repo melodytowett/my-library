@@ -1,0 +1,6 @@
+[submodule "My-library"]
+	path = My-library
+	url = https://github.com/melodytowett/My-library.git
+[submodule "book"]
+	path = book
+	url = https://github.com/melodytowett/My-library.git
